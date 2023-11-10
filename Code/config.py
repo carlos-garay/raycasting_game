@@ -1,0 +1,22 @@
+import math
+
+# Parámetros ventana de juego
+ANCHO = 1200
+ALTO = 700
+FPS = 60
+
+# Parámetros movimientos del jugador
+POSICION_JUGADOR = 1.5, 5  # COORDENADAS DONDE APARECE EN EL MAPA
+ANGULO_JUGADOR = 0
+VELOCIDAD_JUGADOR = 0.004
+VELOCIDAD_ROTACION_JUGADOR = 0.002
+
+# Parámetros raycasting
+FOV = math.pi / 3
+MITAD_FOV = FOV / 2
+NUM_RAYS = ANCHO // 2
+MITAD_NUM_RAYS = NUM_RAYS // 2
+ANGULO_DELTA = FOV / NUM_RAYS
+MAX_DEPTH = 20
+
+

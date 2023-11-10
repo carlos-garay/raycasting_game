@@ -9,11 +9,8 @@ import pygame as pg
 from mapa import *
 import sys
 from jugador import *
-
-# Constantes para configuraciones del tamaño de la ventana y FPS 
-ANCHO = 1200
-ALTO = 700
-FPS = 60
+from config import *
+from raycasting import *
 
 
 class Juego:
@@ -30,10 +27,12 @@ class Juego:
         """ Método para mandar llamar a la creación del mapa inicial """
         self.mapa = Mapa(self)
         self.jugador = Jugador(self)
+        self.raycasting = RayCasting(self)
     
     def refrescar_pantalla(self):
         """ Actualizar la pantalla del juego, incluye información de FPS """
         self.jugador.actualizar()
+        self.raycasting.actualizar()
         pg.display.flip()
         self.tiempo_delta = self.clock.tick(FPS)
         pg.display.set_caption(f'{self.clock.get_fps():.1f}')

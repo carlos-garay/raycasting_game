@@ -1,14 +1,7 @@
 
 import pygame as pg
 import math
-
-POSICION_JUGADOR = 1.5, 5  # COORDENADAS DONDE APARECE EN EL MAPA
-ANGULO_JUGADOR = 0
-VELOCIDAD_JUGADOR = 0.004
-VELOCIDAD_ROTACION_JUGADOR = 0.002
-ANCHO = 1200
-ALTO = 700
-
+from config import *
 
 class Jugador:
     """ Clase del jugador con su posición y atributos de movimiento"""
@@ -62,10 +55,10 @@ class Jugador:
             self.y += dy
 
     def dibujar(self):
-        """ Método para dibujar al jugador y la línea de donde apunta su dirección """
-        pg.draw.line(self.juego.pantalla, 'yellow', (self.x * 70, self.y * 70),
-                     (self.x * 70 + ANCHO * math.cos(self.angulo),
-                      self.y * 70 + ANCHO * math.sin(self.angulo)), 2)
+        """ Método para dibujar al jugador y la línea de donde apunta su dirección para prueba que funciona"""
+        # pg.draw.line(self.juego.pantalla, 'yellow', (self.x * 70, self.y * 70),
+        #              (self.x * 70 + ANCHO * math.cos(self.angulo),
+        #               self.y * 70 + ANCHO * math.sin(self.angulo)), 2)
         pg.draw.circle(self.juego.pantalla, 'green', (self.x * 70, self.y * 70), 15)
 
     def actualizar(self):
