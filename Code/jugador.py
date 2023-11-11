@@ -3,6 +3,7 @@ import pygame as pg
 import math
 from config import *
 
+
 class Jugador:
     """ Clase del jugador con su posición y atributos de movimiento"""
     def __init__(self, juego):
@@ -74,4 +75,3 @@ class Jugador:
     def posicion_mapa(self):
         """ propiedad para regresar las coordenadas en int de la posición en el mapa en la que está el jugador"""
         return int(self.x), int(self.y)
-

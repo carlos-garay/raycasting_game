@@ -40,8 +40,8 @@ class Juego:
     def dibujar(self):
         """ Dibujamos los gráficos en pantalla """
         self.pantalla.fill('black')
-        self.mapa.dibujar()
-        self.jugador.dibujar()
+        # self.mapa.dibujar()
+        # self.jugador.dibujar()
 
     def revisar_eventos(self):
         """ Revisar los eventos del teclado para ejecutar una respectiva función """
@@ -61,4 +61,3 @@ class Juego:
 if __name__ == '__main__':
     juego = Juego()
     juego.run()
-

@@ -15,7 +15,9 @@ mapa_1 = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
 
+
 class Mapa:
+    """ Clase para guardar y mostrar el mapa del nivel"""
     def __init__(self, juego):
         self.juego = juego
         self.mapa_1 = mapa_1

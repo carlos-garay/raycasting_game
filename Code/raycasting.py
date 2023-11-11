@@ -2,6 +2,7 @@ import pygame as pg
 import math
 from config import *
 
+
 class RayCasting:
     """ Clase que maneja la apariencia delos gráficos en 3D por raycasting"""
     def __init__(self, juego):
@@ -53,7 +54,7 @@ class RayCasting:
             delta_distancia = dy / sin_a
             dx = delta_distancia * cos_a
 
-            for i in range (MAX_DEPTH):
+            for i in range(MAX_DEPTH):
                 tile_horizontal = int(x_hor), int(y_hor)
                 if tile_horizontal in self.juego.mapa.mapa_mundo1:
                     break
@@ -69,10 +70,16 @@ class RayCasting:
             else:
                 distancia = distancia_hor
 
-            # mostrar lineas para test
-            # TODO hacer un parametro el tamaño de los tiles (70)
-            pg.draw.line(self.juego.pantalla, 'yellow', (70 * ox, 70 * oy),
-                         (70 * ox + 70 * distancia * cos_a, 70 * oy + 70 * distancia * sin_a))
+            # para eliminar el efecto convexo
+            distancia *= math.cos(self.juego.jugador.angulo - angulo_ray)
+
+            # proyección
+            altura_proyeccion = DISTANCIA_PANTALLA / (distancia + 0.0001)  # Evitar division por 0
+
+            # dibujar paredes, acorde al número de rayo para calcular su altura proyectada
+            color = [255 / (1 + distancia ** 5 * 0.00002)] * 3
+            pg.draw.rect(self.juego.pantalla, color,
+                         (ray * ESCALA, MITAD_ALTO - altura_proyeccion // 2, ESCALA, altura_proyeccion))
 
             angulo_ray += ANGULO_DELTA
 
