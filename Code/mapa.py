@@ -1,4 +1,5 @@
 import pygame as pg
+from config import *
 
 # Los valores como False son espacioes en blanco y los números paredes
 o = False
@@ -6,11 +7,11 @@ o = False
 mapa_1 = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, o, o, 1, 1, o, o, o, o, o, o, o, o, o, 1],
-    [1, o, o, o, o, o, o, o, o, o, 1, 1, o, o, 1],
-    [1, o, o, o, o, o, o, o, o, o, o, 1, 1, o, 1],
+    [1, o, o, o, o, o, o, o, o, o, 1, 1, 1, o, 1],
+    [1, o, o, o, o, o, o, o, o, o, o, o, 1, o, 1],
     [1, o, o, 2, 2, o, o, o, o, o, o, o, 1, o, 1],
-    [1, o, o, 2, 2, o, o, o, o, o, o, o, o, o, 1],
-    [1, o, o, o, o, o, o, o, o, o, o, o, o, o, 1],
+    [1, o, o, 2, 2, o, o, o, 1, 1, o, o, 1, o, 1],
+    [1, o, o, o, o, o, o, o, o, 1, 1, 1, 1, o, 1],
     [1, o, o, 1, 1, o, o, 1, o, o, o, o, o, o, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
@@ -34,5 +35,5 @@ class Mapa:
     def dibujar(self):
         """ Método para test que aparezca el mapa"""
 
-        [pg.draw.rect(self.juego.pantalla, 'darkgray', (pos[0] * 70, pos[1] * 70, 70, 70), 2)
+        [pg.draw.rect(self.juego.pantalla, 'darkgray', (pos[0] * TILE_SIZE, pos[1] * TILE_SIZE, TILE_SIZE, TILE_SIZE), 2)
          for pos in self.mapa_mundo1]
