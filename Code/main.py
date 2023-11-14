@@ -13,6 +13,8 @@ from config import *
 from raycasting import *
 from render_objetos import *
 from object_handler import *
+from sonido import *
+from pathfinding import *
 
 
 class Juego:
@@ -32,6 +34,8 @@ class Juego:
         self.renderer_objetos = RendererObjetos(self)
         self.raycasting = RayCasting(self)
         self.object_handler = ObjectHandler(self)
+        self.sonido = Sonido(self)
+        self.pathfinding = PathFinding(self)
 
     def refrescar_pantalla(self) -> None:
         """ Actualizar la pantalla del juego, incluye información de FPS """
@@ -45,6 +49,8 @@ class Juego:
     def dibujar(self) -> None:
         """ Dibujamos los gráficos en pantalla """
         self.renderer_objetos.dibujar()
+
+        # self.pantalla.fill('black')
         # self.mapa.dibujar()
         # self.jugador.dibujar()
 
