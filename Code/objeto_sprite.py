@@ -4,7 +4,7 @@ from config import *
 class ObjetoSprite:
     """ Clase para crear los sprites que tiene el juego"""
 
-    def __init__(self, juego, ruta='./assets/sprites/static_sprites/banana.png', posicion=(10.5, 3.5),
+    def __init__(self, juego, ruta='../assets/sprites/static_sprites/banana.png', posicion=(10.5, 3.5),
                  escala=0.3, shift=1.20):
         self.juego = juego
         self.jugador = juego.jugador

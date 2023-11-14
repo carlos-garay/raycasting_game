@@ -73,8 +73,8 @@ class RayCasting:
             for i in range(MAX_DEPTH):
                 tile_vertical = int(x_vert), int(y_vert)
                 # revisamos el paso del rayo hasta llegar a la maxima profundidad o toparse con una pared
-                if tile_vertical in self.juego.mapa.mapa_mundo1:
-                    textura_vert = self.juego.mapa.mapa_mundo1[tile_vertical]
+                if tile_vertical in self.juego.mapa.mapa_mundo:
+                    textura_vert = self.juego.mapa.mapa_mundo[tile_vertical]
                     break
                 # sino continuamos añadiendo la distancia segun los tiles que vamos pasando
                 x_vert += dx
@@ -94,8 +94,8 @@ class RayCasting:
 
             for i in range(MAX_DEPTH):
                 tile_horizontal = int(x_hor), int(y_hor)
-                if tile_horizontal in self.juego.mapa.mapa_mundo1:
-                    textura_hor = self.juego.mapa.mapa_mundo1[tile_horizontal]
+                if tile_horizontal in self.juego.mapa.mapa_mundo:
+                    textura_hor = self.juego.mapa.mapa_mundo[tile_horizontal]
                     break
 
                 x_hor += dx

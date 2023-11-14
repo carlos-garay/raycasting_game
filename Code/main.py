@@ -37,6 +37,16 @@ class Juego:
         self.sonido = Sonido(self)
         self.pathfinding = PathFinding(self)
 
+    def reiniciar_nivel(self):
+        """ Método para reiniciar el nivel si el jugador es atrapadswo"""
+        self.mapa = Mapa(self)
+        self.raycasting = RayCasting(self)
+        self.sonido = Sonido(self)
+        self.object_handler = ObjectHandler(self)
+        self.jugador.x, self.jugador.y = POSICION_JUGADOR
+        self.jugador.angulo = ANGULO_JUGADOR
+        self.jugador.bananas = 0
+
     def refrescar_pantalla(self) -> None:
         """ Actualizar la pantalla del juego, incluye información de FPS """
         self.jugador.actualizar()
