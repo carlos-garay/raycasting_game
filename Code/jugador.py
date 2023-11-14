@@ -50,9 +50,10 @@ class Jugador:
 
     def revisar_colision_pared(self, dx, dy):
         """ Revisa si el jugador intenta entrar a una coordenada donde tenemos una pared para impedírselo"""
-        if (int(self.x + dx), int(self.y)) not in self.juego.mapa.mapa_mundo1:
+        escala = ESCALA_TAMANNO_JUGADOR / self.juego.tiempo_delta
+        if (int(self.x + dx * escala), int(self.y)) not in self.juego.mapa.mapa_mundo1:
             self.x += dx
-        if (int(self.x), int(self.y + dy)) not in self.juego.mapa.mapa_mundo1:
+        if (int(self.x), int(self.y + dy * escala)) not in self.juego.mapa.mapa_mundo1:
             self.y += dy
 
     def dibujar(self):
