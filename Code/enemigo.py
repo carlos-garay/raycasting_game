@@ -1,14 +1,14 @@
 from sprite_animado import *
 import math
 import sys
-from random import randint, random, choice
 
 
 class Enemigo(SpriteAnimado):
     """ Clase para crear los enemigos """
     def __init__(self, juego, ruta='../assets/sprites/animated_sprites/donkey_kong/0.png', posicion=(12.5, 1.5),
                  escala=1, shift=0.1, tiempo_animacion=100, velocidad=0.038, tamanno=20):
-        super().__init__(juego, ruta, posicion, escala, shift, tiempo_animacion)
+        super().__init__(juego, ruta, escala, shift, tiempo_animacion)
+        self.x, self.y = posicion
         self.velocidad = velocidad
         self.tamanno = tamanno
         self.vivo = True
@@ -20,10 +20,10 @@ class Enemigo(SpriteAnimado):
         """ Método para regresar como tupla la posición en el mapa que tiene el enemigo"""
         return int(self.x), int(self.y)
 
-    def actualizar(self):
+    def actualizar_enemigo(self):
         """ Método para actualizar el estado del enemigo """
         self.revisar_tiempo_animacion()
-        self.get_sprite()
+        self.get_sprite(self.x, self.y)
         self.logica_enemigo()
         # self.draw_ray_cast()
 

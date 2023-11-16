@@ -15,6 +15,7 @@ from render_objetos import *
 from object_handler import *
 from sonido import *
 from pathfinding import *
+from fabrica_coleccionable import *
 
 
 class Juego:
@@ -25,7 +26,14 @@ class Juego:
         self.pantalla = pg.display.set_mode((ANCHO, ALTO))
         self.clock = pg.time.Clock()
         self.tiempo_delta = 1
-        self.nueva_partida()
+        self.mapa = Mapa(self)
+        self.renderer_objetos = RendererObjetos(self)
+        self.raycasting = RayCasting(self)
+        self.sonido = Sonido(self)
+        self.pathfinding = PathFinding(self)
+        self.jugador = Jugador(self)
+        self.object_handler = ObjectHandler(self)
+        FabricaColeccionable.limpiar_lista()
 
     def nueva_partida(self) -> None:
         """ Método para mandar llamar a la creación del mapa inicial """
@@ -36,9 +44,10 @@ class Juego:
         self.pathfinding = PathFinding(self)
         self.jugador = Jugador(self)
         self.object_handler = ObjectHandler(self)
+        FabricaColeccionable.limpiar_lista()
 
     def reiniciar_nivel(self):
-        """ Método para reiniciar el nivel si el jugador es atrapadswo"""
+        """ Método para reiniciar el nivel si el jugador es atrapado """
         self.mapa = Mapa(self)
         self.raycasting = RayCasting(self)
         self.sonido = Sonido(self)
@@ -46,6 +55,8 @@ class Juego:
         self.jugador.x, self.jugador.y = POSICION_JUGADOR
         self.jugador.angulo = ANGULO_JUGADOR
         self.jugador.bananas = 0
+        self.jugador.llave = False
+        FabricaColeccionable.limpiar_lista()
 
     def refrescar_pantalla(self) -> None:
         """ Actualizar la pantalla del juego, incluye información de FPS """

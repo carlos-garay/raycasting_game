@@ -11,7 +11,7 @@ class Coleccionable(ABC):
     """ Interfaz para objetos que sean coleccionables por el jugador """
 
     @abstractmethod
-    def actualizar(self):
+    def actualizar_coleccionable(self):
         """ Método abstracto para actualizar el estado del coleccionable """
         pass
 

@@ -4,6 +4,7 @@ from banana import Banana
 from llave import Llave
 from enemigo import *
 from coleccionable import *
+from fabrica_coleccionable import *
 
 
 class ObjectHandler:
@@ -43,9 +44,9 @@ class ObjectHandler:
     def actualizar(self):
         """ Método para actualizar los cambios a todos los sprites """
         self.posiciones_enemigos = {enemigo.posicion_mapa for enemigo in self.lista_enemigos if enemigo.vivo}
-        [coleccionable.actualizar() for coleccionable in self.lista_coleccionables if
+        [coleccionable.actualizar_coleccionable() for coleccionable in self.lista_coleccionables if
          coleccionable.bandera_activo is True]
-        [enemigo.actualizar() for enemigo in self.lista_enemigos]
+        [enemigo.actualizar_enemigo() for enemigo in self.lista_enemigos]
 
     def agregar_enemigo(self, enemigo):
         """ Método para agregar enemigos a la lista """
@@ -55,9 +56,13 @@ class ObjectHandler:
         """ Método para agregar un sprite coleccionable a la lista """
         sprite = Banana(self.juego)
         if tipo.value == "banana":
-            sprite = Banana(self.juego, self.ruta_sprites_estaticos + 'banana.png', posicion, escala=0.3, shift=1.20)
+            coleccionable_flyweight = FabricaColeccionable.get_tipo_coleccionable(tipo.value, self.juego,
+                self.ruta_sprites_estaticos + 'banana.png', escala=0.3, shift=1.20, rango_coleccion=0.5)
+            sprite = Banana(coleccionable_flyweight, posicion)
         elif tipo.value == "llave":
-            sprite = Llave(self.juego, self.ruta_sprites_estaticos + 'key.png', posicion, escala=0.4, shift=1.0)
+            coleccionable_flyweight = FabricaColeccionable.get_tipo_coleccionable(tipo.value, self.juego,
+                self.ruta_sprites_estaticos + 'key.png', escala=0.4, shift=1.0, rango_coleccion=0.5)
+            sprite = Llave(coleccionable_flyweight, posicion)
         elif tipo.value == "bandera":
             pass
 
