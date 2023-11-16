@@ -1,7 +1,10 @@
+from abc import ABC
+
 import pygame as pg
 from config import *
 
-class ObjetoSprite:
+
+class ObjetoSprite(ABC):
     """ Clase para crear los sprites que tiene el juego"""
 
     def __init__(self, juego, ruta='../assets/sprites/static_sprites/banana.png', posicion=(10.5, 3.5),

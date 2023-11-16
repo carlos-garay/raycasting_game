@@ -30,12 +30,12 @@ class Juego:
     def nueva_partida(self) -> None:
         """ Método para mandar llamar a la creación del mapa inicial """
         self.mapa = Mapa(self)
-        self.jugador = Jugador(self)
         self.renderer_objetos = RendererObjetos(self)
         self.raycasting = RayCasting(self)
-        self.object_handler = ObjectHandler(self)
         self.sonido = Sonido(self)
         self.pathfinding = PathFinding(self)
+        self.jugador = Jugador(self)
+        self.object_handler = ObjectHandler(self)
 
     def reiniciar_nivel(self):
         """ Método para reiniciar el nivel si el jugador es atrapadswo"""
@@ -64,17 +64,17 @@ class Juego:
         # self.mapa.dibujar()
         # self.jugador.dibujar()
 
-    def revisar_eventos(self) -> None:
-        """ Revisar los eventos del teclado para ejecutar una respectiva función """
+    def revisar_salir(self) -> None:
+        """ Revisar los eventos del teclado para saber si se debe cerrar la aplicacion """
         for evento in pg.event.get():
             if evento.type == pg.QUIT or (evento.type == pg.KEYDOWN and evento.key == pg.K_ESCAPE):
                 pg.quit()
                 sys.exit()
-        
+
     def run(self) -> None:
         """ Método principal del juego donde se mantiene corriendo """
         while True:
-            self.revisar_eventos()
+            self.revisar_salir()
             self.refrescar_pantalla()
             self.dibujar()
 

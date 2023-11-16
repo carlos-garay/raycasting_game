@@ -74,7 +74,10 @@ class Enemigo(SpriteAnimado):
 
             self.juego.jugador.vidas -= 1
             if self.juego.jugador.vidas < 0:
-                pg.quit()
-                sys.exit()
-            self.juego.renderer_objetos.dibujar_vidas_jugador()
-            self.juego.reiniciar_nivel()
+                self.juego.renderer_objetos.game_over()
+                pg.display.flip()
+                pg.time.delay(2000)
+                self.juego.nueva_partida()
+            else:
+                self.juego.renderer_objetos.dibujar_vidas_jugador()
+                self.juego.reiniciar_nivel()

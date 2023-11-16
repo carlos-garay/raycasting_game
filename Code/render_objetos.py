@@ -14,6 +14,8 @@ class RendererObjetos:
         self.imagenes_digitos = [self.get_textura(f'../assets/sprites/static_sprites/numbers/{i}.png',
                                                   [self.tamanno_digitos] * 2) for i in range(0, 12)]
         self.digitos = dict(zip(map(str, range(0, 12)), self.imagenes_digitos))
+        self.imagen_game_over = self.get_textura('../assets/textures/game_over.jpg', (ANCHO, ALTO))
+        self.imagen_ganar = self.get_textura('../assets/textures/win_screen.jpg', (ANCHO, ALTO))
 
     def dibujar(self):
         """ Llamar al método para dibujar los objetos en la lista a renderizar """
@@ -26,6 +28,14 @@ class RendererObjetos:
         self.render_objetos_juego()
         self.dibujar_bananas_jugador()
         self.dibujar_vidas_jugador()
+
+    def game_over(self):
+        """ Método para mostrar la imagen de game over en la pantalla """
+        self.pantalla.blit(self.imagen_game_over, (0, 0))
+
+    def ganar(self):
+        """ Método para mostrar la imagen de game over en la pantalla """
+        self.pantalla.blit(self.imagen_ganar, (0, 0))
 
     def dibujar_bananas_jugador(self):
         """ Método para mostrar la cantidad de bananas que el jugador ha recolectado en la partida utilizando las
@@ -61,5 +71,7 @@ class RendererObjetos:
          en el arreglo de mapa representa que la pared lleva esa textura) y la imagen obtenida de assets como valor """
         return{
             1: self.get_textura('../assets/textures/backroom_wall.png'),
-            2: self.get_textura('../assets/textures/backroom_wall2.png')
+            2: self.get_textura('../assets/textures/backroom_wall2.png'),
+            3: self.get_textura('../assets/textures/locked_door.JPG'),
+            4: self.get_textura('../assets/textures/open_door.JPG')
         }
