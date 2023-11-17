@@ -6,7 +6,7 @@ class PathFinding:
     """ Clase para definir un algoritmo de búsqueda para el enemigo principal """
     def __init__(self, juego):
         self.juego = juego
-        self.mapa = juego.mapa.mapa_1
+        self.mapa = juego.mapa.mapa
         # El enemigo se puede mover en 8 direcciones
         self.direcciones = [-1, 0], [0, -1], [1, 0], [0, 1], [-1, -1], [1, -1], [1, 1], [-1, 1]
         self.grafo = {}
@@ -42,12 +42,13 @@ class PathFinding:
                     visitados[nodo_siguiente] = nodo_actual
         return visitados
 
+    # REFACTOR extract method
     def get_nodos_siguientes(self, x, y):
-        """ Método para obtener la lista de tiles adyacentes, nuestros nodos vecinos en BFS"""
-        return [(x + dx, y + dy) for dx, dy in self.direcciones if (x + dx, y + dy) not in self.juego.mapa.mapa_mundo1]
+        """ Método para obtener la lista de tiles adyacentes, nuestros nodos vecinos en BFS """
+        return [(x + dx, y + dy) for dx, dy in self.direcciones if (x + dx, y + dy) not in self.juego.mapa.mapa_mundo]
 
     def get_grafo(self):
-        """  Método para obtener el diccionario del grafo segun los vecinos de cada nodo.  """
+        """  Método para obtener el diccionario del grafo segun los vecinos de cada nodo. """
         for y, fila in enumerate(self.mapa):
             for x, col in enumerate(fila):
                 if not col:

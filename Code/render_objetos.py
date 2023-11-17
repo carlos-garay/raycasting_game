@@ -1,3 +1,5 @@
+import math
+
 import pygame as pg
 from config import *
 
@@ -8,16 +10,58 @@ class RendererObjetos:
         self.juego = juego
         self.pantalla = juego.pantalla
         self.textura_pared = self.cargar_texturas_pared()
+        self.textura_cielo = self.get_textura('../assets/textures/jungle_skybox.jpg', (ANCHO, MITAD_ALTO))
+        self.offset_cielo = 0
+
+        # Digitos para mostrar el total de bananas recolectadas y las vidas
+        self.tamanno_digitos = 60
+        self.imagenes_digitos = [self.get_textura(f'../assets/sprites/static_sprites/numbers/{i}.png',
+                                                  [self.tamanno_digitos] * 2) for i in range(0, 12)]
+        self.digitos = dict(zip(map(str, range(0, 12)), self.imagenes_digitos))
+        self.imagen_game_over = self.get_textura('../assets/textures/game_over.jpg', (ANCHO, ALTO))
+        self.imagen_ganar = self.get_textura('../assets/textures/win_screen.jpg', (ANCHO, ALTO))
 
     def dibujar(self):
         """ Llamar al método para dibujar los objetos en la lista a renderizar """
+        self.dibujar_fondo()
+
+        self.render_objetos_juego()
+        self.dibujar_bananas_jugador()
+        self.dibujar_vidas_jugador()
+
+    def dibujar_fondo(self):
+        """ Método para dibujar el piso y la textura de la skybox"""
+        # dibujar la skybox
+        self.offset_cielo = (ANCHO * self.juego.jugador.angulo/math.tau) % ANCHO
+        self.pantalla.blit(self.textura_cielo, (-self.offset_cielo, 0))
+        self.pantalla.blit(self.textura_cielo, (-self.offset_cielo + ANCHO, 0))
+
         # dibujar el piso
         pg.draw.rect(self.pantalla, COLOR_PISO, (0, MITAD_ALTO, ANCHO, ALTO))
 
-        # dibujar el techo
-        pg.draw.rect(self.pantalla, COLOR_TECHO, (0, 0, ANCHO, MITAD_ALTO))
+    def game_over(self):
+        """ Método para mostrar la imagen de game over en la pantalla """
+        self.pantalla.blit(self.imagen_game_over, (0, 0))
 
-        self.render_objetos_juego()
+    def ganar(self):
+        """ Método para mostrar la imagen de game over en la pantalla """
+        self.pantalla.blit(self.imagen_ganar, (0, 0))
+
+    def dibujar_bananas_jugador(self):
+        """ Método para mostrar la cantidad de bananas que el jugador ha recolectado en la partida utilizando las
+        imágenes para esto"""
+        bananas = str(self.juego.jugador.bananas)
+        for i, char in enumerate(bananas):
+            self.pantalla.blit(self.digitos[char], (i * self.tamanno_digitos + 5, 10))
+        self.pantalla.blit(self.digitos['10'], ((i + 1) * self.tamanno_digitos + 5, 10))
+
+    def dibujar_vidas_jugador(self):
+        """ Método para mostrar la cantidad de bananas que el jugador ha recolectado en la partida utilizando las
+        imágenes para esto"""
+        vidas = str(self.juego.jugador.vidas)
+        for i, char in enumerate(vidas):
+            self.pantalla.blit(self.digitos[char], (ANCHO - (2 * self.tamanno_digitos) - 5, 10))
+        self.pantalla.blit(self.digitos['11'], (ANCHO - self.tamanno_digitos - 5, 10))
 
     def render_objetos_juego(self):
         """ Acceder a la lista de los objetos que se tienen que renderizar y dibujarlos"""
@@ -36,6 +80,9 @@ class RendererObjetos:
         """ Método para cargar las texturas de las paredes, con un mapa con un número de textura como llave (mismo que
          en el arreglo de mapa representa que la pared lleva esa textura) y la imagen obtenida de assets como valor """
         return{
-            1: self.get_textura('./assets/textures/backroom_wall.png'),
-            2: self.get_textura('./assets/textures/backroom_wall2.png')
+            1: self.get_textura('../assets/textures/jungle1.JPG'),
+            2: self.get_textura('../assets/textures/jungle2.JPG'),
+            3: self.get_textura('../assets/textures/locked_door.JPG'),
+            4: self.get_textura('../assets/textures/open_door.JPG'),
+            5: self.get_textura('../assets/textures/rock1.JPG')
         }

@@ -10,6 +10,9 @@ class Jugador:
         self.juego = juego
         self.x, self.y = POSICION_JUGADOR
         self.angulo = ANGULO_JUGADOR
+        self.bananas = 0
+        self.vidas = 3
+        self.llave = False
 
     def movimiento(self):
         """ Utilizando el ángulo que tiene el jugador y la tecla de movimiento que presiones podemos calcular
@@ -41,6 +44,7 @@ class Jugador:
             dy += cos_velocidad
 
         self.revisar_colision_pared(dx, dy)
+        self.revisar_condicion_ganar()
 
         if keys[pg.K_LEFT]:
             self.angulo -= VELOCIDAD_ROTACION_JUGADOR * self.juego.tiempo_delta
@@ -51,13 +55,15 @@ class Jugador:
     def revisar_colision_pared(self, dx, dy):
         """ Revisa si el jugador intenta entrar a una coordenada donde tenemos una pared para impedírselo"""
         escala = ESCALA_TAMANNO_JUGADOR / self.juego.tiempo_delta
-        if (int(self.x + dx * escala), int(self.y)) not in self.juego.mapa.mapa_mundo1:
+        if (int(self.x + dx * escala), int(self.y)) not in self.juego.mapa.mapa_mundo:
             self.x += dx
-        if (int(self.x), int(self.y + dy * escala)) not in self.juego.mapa.mapa_mundo1:
+        if (int(self.x), int(self.y + dy * escala)) not in self.juego.mapa.mapa_mundo:
             self.y += dy
+        if abs(dx) > 0.5 or abs(dy) > 0.5:
+            self.x, self.y = POSICION_JUGADOR
 
     def dibujar(self):
-        """ Método para dibujar al jugador y la línea de donde apunta su dirección para prueba que funciona"""
+        """ Método para dibujar al jugador y la línea donde apunta su dirección para prueba que funciona"""
         pg.draw.line(self.juego.pantalla, 'yellow', (self.x * TILE_SIZE, self.y * TILE_SIZE),
                      (self.x * TILE_SIZE + ANCHO * math.cos(self.angulo),
                       self.y * TILE_SIZE + ANCHO * math.sin(self.angulo)), 2)
@@ -66,6 +72,16 @@ class Jugador:
     def actualizar(self):
         """ Método para llamar a la función de movimiento cada cierto tiempo"""
         self.movimiento()
+
+    def revisar_condicion_ganar(self) -> None:
+        """ Revisar si el jugador llegó a la puerta con las llaves para llamar las condiciones de ganar """
+        door_x, door_y = self.juego.mapa.posicion_puerta
+        if int(self.y) == door_y and self.x > door_x - 0.25 and self.llave:
+            self.juego.renderer_objetos.ganar()
+            pg.display.flip()
+            pg.time.delay(2000)
+            self.juego.nueva_partida()
+            pg.time.delay(300)
 
     @property
     def posicion(self):
