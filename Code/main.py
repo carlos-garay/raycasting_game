@@ -38,6 +38,7 @@ class Juego:
         self.object_handler = ObjectHandler(self)
         self.checkpoint = Checkpoint(self)
         FabricaColeccionable.limpiar_lista()
+        self.sonido.poner_musica()
 
     def nueva_partida(self) -> None:
         """ Método para mandar llamar a la creación del mapa inicial """

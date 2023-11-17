@@ -28,5 +28,6 @@ class Banana(Coleccionable):
         # Cuando el jugador esta encima del coleccionable y aun no se obtiene, omitiendo el 0 cuando se estan cargando
         if distancia < self.flyweight.rango_coleccion and distancia != 0 and self.bandera_activo:
             self.bandera_activo = False
+            self.flyweight.juego.sonido.banana.play()
             self.flyweight.juego.jugador.bananas += 1
             self.flyweight.juego.renderer_objetos.dibujar_bananas_jugador()

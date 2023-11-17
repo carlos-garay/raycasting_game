@@ -13,7 +13,6 @@ class Jugador:
         self.bananas = 0
         self.vidas = 3
         self.llave = False
-        self.rel = 0
 
     def movimiento(self):
         """ Utilizando el ángulo que tiene el jugador y la tecla de movimiento que presiones podemos calcular

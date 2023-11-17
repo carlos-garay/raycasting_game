@@ -28,5 +28,6 @@ class Bandera(Coleccionable):
         # Cuando el jugador esta encima del coleccionable y aun no se obtiene, omitiendo el 0 cuando se estan cargando
         if distancia < self.flyweight.rango_coleccion and distancia != 0 and self.bandera_activo:
             self.bandera_activo = False
+            self.flyweight.juego.sonido.bandera.play()
             self.flyweight.juego.checkpoint.crear_checkpoint()
 

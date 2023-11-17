@@ -28,6 +28,7 @@ class Llave(Coleccionable):
         # Cuando el jugador esta encima del coleccionable y aun no se obtiene, omitiendo el 0 cuando se estan cargando
         if distancia < self.flyweight_coleccionable.rango_coleccion and distancia != 0 and self.bandera_activo:
             self.bandera_activo = False
+            self.flyweight_coleccionable.juego.sonido.llave.play()
             self.flyweight_coleccionable.juego.jugador.llave = True
 
             # SUBSTITUTE ALGORITHM
