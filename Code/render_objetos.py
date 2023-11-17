@@ -1,3 +1,5 @@
+import math
+
 import pygame as pg
 from config import *
 
@@ -8,6 +10,8 @@ class RendererObjetos:
         self.juego = juego
         self.pantalla = juego.pantalla
         self.textura_pared = self.cargar_texturas_pared()
+        self.textura_cielo = self.get_textura('../assets/textures/jungle_skybox.jpg', (ANCHO, MITAD_ALTO))
+        self.offset_cielo = 0
 
         # Digitos para mostrar el total de bananas recolectadas y las vidas
         self.tamanno_digitos = 60
@@ -19,15 +23,21 @@ class RendererObjetos:
 
     def dibujar(self):
         """ Llamar al método para dibujar los objetos en la lista a renderizar """
-        # dibujar el piso
-        pg.draw.rect(self.pantalla, COLOR_PISO, (0, MITAD_ALTO, ANCHO, ALTO))
-
-        # dibujar el techo
-        pg.draw.rect(self.pantalla, COLOR_TECHO, (0, 0, ANCHO, MITAD_ALTO))
+        self.dibujar_fondo()
 
         self.render_objetos_juego()
         self.dibujar_bananas_jugador()
         self.dibujar_vidas_jugador()
+
+    def dibujar_fondo(self):
+        """ Método para dibujar el piso y la textura de la skybox"""
+        # dibujar la skybox
+        self.offset_cielo = (ANCHO * self.juego.jugador.angulo/math.tau) % ANCHO
+        self.pantalla.blit(self.textura_cielo, (-self.offset_cielo, 0))
+        self.pantalla.blit(self.textura_cielo, (-self.offset_cielo + ANCHO, 0))
+
+        # dibujar el piso
+        pg.draw.rect(self.pantalla, COLOR_PISO, (0, MITAD_ALTO, ANCHO, ALTO))
 
     def game_over(self):
         """ Método para mostrar la imagen de game over en la pantalla """
@@ -70,8 +80,9 @@ class RendererObjetos:
         """ Método para cargar las texturas de las paredes, con un mapa con un número de textura como llave (mismo que
          en el arreglo de mapa representa que la pared lleva esa textura) y la imagen obtenida de assets como valor """
         return{
-            1: self.get_textura('../assets/textures/backroom_wall.png'),
-            2: self.get_textura('../assets/textures/backroom_wall2.png'),
+            1: self.get_textura('../assets/textures/jungle1.JPG'),
+            2: self.get_textura('../assets/textures/jungle2.JPG'),
             3: self.get_textura('../assets/textures/locked_door.JPG'),
-            4: self.get_textura('../assets/textures/open_door.JPG')
+            4: self.get_textura('../assets/textures/open_door.JPG'),
+            5: self.get_textura('../assets/textures/rock1.JPG')
         }

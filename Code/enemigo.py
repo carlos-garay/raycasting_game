@@ -80,4 +80,4 @@ class Enemigo(SpriteAnimado):
                 self.juego.nueva_partida()
             else:
                 self.juego.renderer_objetos.dibujar_vidas_jugador()
-                self.juego.reiniciar_nivel()
+                self.juego.checkpoint.cargar_checkpoint()

@@ -30,10 +30,15 @@ class Llave(Coleccionable):
             self.bandera_activo = False
             self.flyweight_coleccionable.juego.jugador.llave = True
 
-            # Buscamos la posición de la puerta y cambiamos su textura a que no tenga candado
-            for llave in self.flyweight_coleccionable.juego.mapa.mapa_mundo:
-                # 3 representa textura puerta cerrada
-                if self.flyweight_coleccionable.juego.mapa.mapa_mundo[llave] == 3:
-                    # 4 representa textura puerta abierta
-                    self.flyweight_coleccionable.juego.mapa.mapa_mundo[llave] = 4
-                    break
+            # SUBSTITUTE ALGORITHM
+            # Cambiamos la textura de la puerta a que no tenga candado
+            posicion_puerta = self.flyweight_coleccionable.juego.mapa.posicion_puerta
+            self.flyweight_coleccionable.juego.mapa.mapa_mundo[posicion_puerta] = 4
+
+            # # Buscamos la posición de la puerta y cambiamos su textura a que no tenga candado
+            # for llave in self.flyweight_coleccionable.juego.mapa.mapa_mundo:
+            #     # 3 representa textura puerta cerrada
+            #     if self.flyweight_coleccionable.juego.mapa.mapa_mundo[llave] == 3:
+            #         # 4 representa textura puerta abierta
+            #         self.flyweight_coleccionable.juego.mapa.mapa_mundo[llave] = 4
+            #         break

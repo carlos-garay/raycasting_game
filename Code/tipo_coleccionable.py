@@ -11,5 +11,5 @@ class TipoColeccionable(ObjetoSprite):
         self.rango_coleccion = rango_coleccion
 
     def actualizar(self, x, y):
-        """ Método para actualizar el estado del coleccionable """
+        """ Método para actualizar el estado visible del coleccionable """
         self.get_sprite(x, y)

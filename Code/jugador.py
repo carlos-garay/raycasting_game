@@ -11,8 +11,9 @@ class Jugador:
         self.x, self.y = POSICION_JUGADOR
         self.angulo = ANGULO_JUGADOR
         self.bananas = 0
-        self.vidas = 2
+        self.vidas = 3
         self.llave = False
+        self.rel = 0
 
     def movimiento(self):
         """ Utilizando el ángulo que tiene el jugador y la tecla de movimiento que presiones podemos calcular
@@ -76,7 +77,7 @@ class Jugador:
     def revisar_condicion_ganar(self) -> None:
         """ Revisar si el jugador llegó a la puerta con las llaves para llamar las condiciones de ganar """
         door_x, door_y = self.juego.mapa.posicion_puerta
-        if int(self.y) == door_y - 1 and self.x > door_x - 0.25 and self.llave:
+        if int(self.y) == door_y and self.x > door_x - 0.25 and self.llave:
             self.juego.renderer_objetos.ganar()
             pg.display.flip()
             pg.time.delay(2000)
