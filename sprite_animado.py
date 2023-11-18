@@ -7,7 +7,7 @@ from collections import deque
 
 class SpriteAnimado(ObjetoSprite):
     """ Clase para manejar sprites animados que cambien entre otros posibles """
-    def __init__(self, juego, ruta='../assets/sprites/animated_sprites/donkey_kong/0.png',
+    def __init__(self, juego, ruta='/assets/sprites/animated_sprites/donkey_kong/0.png',
                  escala=0.9, shift=.10, tiempo_animacion=120):
         super().__init__(juego, ruta, escala, shift)
         self.tiempo_animacion = tiempo_animacion

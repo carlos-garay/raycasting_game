@@ -8,7 +8,11 @@ from collections import deque
 
 
 class Coleccionable(ABC):
-    """ Interfaz para objetos que sean coleccionables por el jugador """
+    """ Clase abstracta para objetos que sean coleccionables por el jugador """
+    def __init__(self, flyweight_coleccionable, posicion):
+        self.x, self.y = posicion
+        self.flyweight = flyweight_coleccionable
+        self.bandera_activo = True
 
     @abstractmethod
     def actualizar_coleccionable(self):

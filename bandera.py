@@ -9,10 +9,7 @@ from coleccionable import Coleccionable
 class Bandera(Coleccionable):
     """ Clase para definir funcionalidad de la bandera """
     def __init__(self, flyweight_coleccionable, posicion=(12.5, 1.5)):
-        self.x, self.y = posicion
-        self.flyweight: TipoColeccionable = flyweight_coleccionable
-        # variable para determinar si ya fue recolectada
-        self.bandera_activo = True
+        super().__init__(flyweight_coleccionable, posicion)
 
     def actualizar_coleccionable(self):
         """ Método para actualizar el estado del coleccionable """

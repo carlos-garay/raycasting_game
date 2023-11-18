@@ -20,8 +20,8 @@ class ObjectHandler:
         self.juego = juego
         self.lista_enemigos = []
         self.lista_coleccionables = []
-        self.ruta_sprites_estaticos = '../assets/sprites/static_sprites/'
-        self.ruta_sprites_animados = '../assets/sprites/animated_sprites/'
+        self.ruta_sprites_estaticos = 'assets/sprites/static_sprites/'
+        self.ruta_sprites_animados = 'assets/sprites/animated_sprites/'
         agregar_coleccionable = self.agregar_coleccionable
         agregar_enemigo = self.agregar_enemigo
         self.posiciones_enemigos = {}  # Si queremos mas de un enemigo, para que no se empalmen
@@ -91,10 +91,10 @@ class ObjectHandler:
 
         # ENEMIGOS
         agregar_enemigo(
-            Enemigo(juego, ruta='../assets/sprites/animated_sprites/donkey_kong/0.png', posicion=(19.5, 1.5),
+            Enemigo(juego, ruta='assets/sprites/animated_sprites/donkey_kong/0.png', posicion=(19.5, 1.5),
                     escala=1.2, shift=0, tiempo_animacion=100, velocidad=0.002, tamanno=10))
         agregar_enemigo(
-            Enemigo(juego, ruta='../assets/sprites/animated_sprites/donkey_kong/0.png', posicion=(25.5, 20.5),
+            Enemigo(juego, ruta='assets/sprites/animated_sprites/donkey_kong/0.png', posicion=(25.5, 20.5),
                     escala=1.2, shift=0, tiempo_animacion=100, velocidad=0.002, tamanno=10))
 
     def actualizar(self):

@@ -6,7 +6,7 @@ class FabricaColeccionable:
     tipos_coleccionable = {}
 
     @classmethod
-    def get_tipo_coleccionable(cls, nombre, juego, ruta='../assets/sprites/static_sprites/banana.png',
+    def get_tipo_coleccionable(cls, nombre, juego, ruta='assets/sprites/static_sprites/banana.png',
                                escala=0.9, shift=.10, rango_coleccion=0.5):
         """ Método para crear los objetos flyweight solo si no existe ya uno de ese tipo en el diccionario """
 
