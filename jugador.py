@@ -78,6 +78,7 @@ class Jugador:
         door_x, door_y = self.juego.mapa.posicion_puerta
         if int(self.y) == door_y and self.x > door_x - 0.25 and self.llave:
             self.juego.renderer_objetos.ganar()
+            self.juego.sonido.ganar.play()
             pg.display.flip()
             pg.time.delay(2000)
             self.juego.nueva_partida()

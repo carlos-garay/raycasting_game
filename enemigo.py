@@ -5,7 +5,7 @@ import sys
 
 class Enemigo(SpriteAnimado):
     """ Clase para crear los enemigos """
-    def __init__(self, juego, ruta='../assets/sprites/animated_sprites/donkey_kong/0.png', posicion=(12.5, 1.5),
+    def __init__(self, juego, ruta='/assets/sprites/animated_sprites/donkey_kong/0.png', posicion=(12.5, 1.5),
                  escala=1, shift=0.1, tiempo_animacion=100, velocidad=0.038, tamanno=20):
         super().__init__(juego, ruta, escala, shift, tiempo_animacion)
         self.x, self.y = posicion
@@ -73,11 +73,13 @@ class Enemigo(SpriteAnimado):
         if distancia < 0.6 and distancia != 0:
 
             self.juego.jugador.vidas -= 1
-            if self.juego.jugador.vidas < 0:
+            if self.juego.jugador.vidas < 1:
+                self.juego.sonido.game_over.play()
                 self.juego.renderer_objetos.game_over()
                 pg.display.flip()
                 pg.time.delay(2000)
                 self.juego.nueva_partida()
             else:
+                self.juego.sonido.golpe_dk.play()
                 self.juego.renderer_objetos.dibujar_vidas_jugador()
                 self.juego.checkpoint.cargar_checkpoint()
